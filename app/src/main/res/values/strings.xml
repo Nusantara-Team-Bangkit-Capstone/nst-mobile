@@ -7,20 +7,4 @@
     <string name="title_profile">Profil</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="invalid_email">Not a valid email</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login">Login</string>
-    <string name="email">Rmail</string>
-    <string name="shr_hint_email">Email</string>
-    <string name="shr_hint_password">Password</string>
-    <string name="imagelogo">imagelogo</string>
-    <string name="peri_gigi">Peri Gigi</string>
-    <string name="not_yet">Belum memiliki akun?</string>
-    <string name="daftar">Daftar</string>
-    <string name="nama_hint">Nama</string>
-    <string name="gender_man">Laki-Laki</string>
-    <string name="gender_woman">Perempuan</string>
-    <string name="address_hint">Alamat</string>
-    <string name="register">Register</string>
-    <string name="already_yet">Anda Sudah Memiliki Akun?</string>
 </resources>

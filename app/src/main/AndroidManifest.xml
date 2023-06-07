@@ -13,18 +13,18 @@
         android:theme="@style/Theme.PeriGigiApps"
         tools:targetApi="31">
         <activity
-            android:name=".ui.screen.home.HomeActivity"
+            android:name=".ui.home.HomeActivity"
             android:exported="true"
-            android:label="@string/title_activity_home" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:label="@string/title_activity_home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

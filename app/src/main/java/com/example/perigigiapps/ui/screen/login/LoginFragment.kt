@@ -1,89 +1,61 @@
 package com.example.perigigiapps.ui.screen.login
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.perigigiapps.R
-import com.example.perigigiapps.data.entity.User
-import com.example.perigigiapps.databinding.FragmentLoginBinding
-import com.example.perigigiapps.di.Injection
-import com.example.perigigiapps.network.NetworkResult
-import com.example.perigigiapps.ui.screen.home.HomeActivity
 import com.example.perigigiapps.ui.screen.register.RegisterFragment
 
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
+
+/**
+ * A simple [Fragment] subclass.
+ * Use the [LoginFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
 class LoginFragment : Fragment() {
-    private var _binding: FragmentLoginBinding? = null
-    private val binding get() = _binding
-    private lateinit var loginViewModel: LoginViewModel
+    // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        return binding?.root
-    }
+        val view = inflater.inflate(R.layout.fragment_login, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-//        To Register Page
         val registerTextView = view.findViewById<TextView>(R.id.register_click)
         registerTextView.setOnClickListener {
             // Perform navigation to the register fragment
             navigateToRegisterFragment()
         }
 
-//        Login To Home Page
-        val userRepository = Injection.provideUserRepository()
-        val factory = LoginViewModel.LoginViewModelFactory(userRepository)
-        loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
-        val loginNavigation = view.findViewById<Button>(R.id.login_button)
-        loginNavigation.setOnClickListener {
-            val email = binding?.emailEditText?.text.toString().trim()
-            val password = binding?.passwordEditText?.text.toString().trim()
-            val user = User(email = email, password = password)
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(activity, "Email atau Password Wajib diisi", Toast.LENGTH_SHORT)
-                    .show()
-            } else {
-                loginViewModel.login(user = user).observe(viewLifecycleOwner) { result ->
-                    if (result != null) {
-                        when (result) {
-                            is NetworkResult.Loading -> {
-                                binding?.progressBar?.isVisible = true
-                            }
+        return view
+    }
 
-                            is NetworkResult.Success -> {
-                                binding?.progressBar?.isVisible = false
-                                val token = result.data.data?.token.orEmpty()
-                                val sharedPreferences = activity?.getSharedPreferences(
-                                    "MyPrefs",
-                                    Context.MODE_PRIVATE
-                                )
-                                sharedPreferences?.edit()?.putString("token", token)?.apply()
-                                val intent = Intent(activity, HomeActivity::class.java)
-                                startActivity(intent)
-                            }
-
-                            is NetworkResult.Error -> {
-                                binding?.progressBar?.isVisible = false
-                                Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT)
-                                    .show()
-                            }
-                        }
-                    }
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            LoginFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
                 }
             }
-
-        }
     }
 
     private fun navigateToRegisterFragment() {
@@ -101,5 +73,4 @@ class LoginFragment : Fragment() {
         // Commit the transaction
         fragmentTransaction.commit()
     }
-
 }

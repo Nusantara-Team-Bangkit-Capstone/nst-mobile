@@ -7,7 +7,6 @@
     tools:context=".ui.screen.home.HomeFragment">
 
     <ImageView
-        android:id="@+id/banner_home"
         android:layout_width="match_parent"
         android:layout_height="170dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,31 +34,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="@string/article_kesehatan"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner_home" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_story"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_home" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

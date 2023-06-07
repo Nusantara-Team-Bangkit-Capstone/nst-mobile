@@ -23,4 +23,7 @@
     <string name="address_hint">Alamat</string>
     <string name="register">Register</string>
     <string name="already_yet">Anda Sudah Memiliki Akun?</string>
+    <string name="tv_item_title">Title</string>
+    <string name="tv_item_description">Description</string>
+    <string name="article_kesehatan">Artikel Kesehatan</string>
 </resources>

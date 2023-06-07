@@ -1,4 +1,4 @@
-package com.example.perigigiapps.network.response
+package com.example.perigigiapps.network.response.login
 
 import com.google.gson.annotations.SerializedName
 

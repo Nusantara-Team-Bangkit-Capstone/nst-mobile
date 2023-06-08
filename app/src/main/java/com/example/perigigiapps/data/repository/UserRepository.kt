@@ -13,6 +13,15 @@ class UserRepository(private val apiService: ApiService) {
         try {
             emit(NetworkResult.Success(apiService.postLogin(user)))
         } catch (e: Exception) {
+            emit(NetworkResult.Error(e.message.orEmpty()))
+        }
+    }
+
+    fun register(user: User) = liveData(Dispatchers.IO) {
+        emit(NetworkResult.Loading)
+        try {
+            emit(NetworkResult.Success(apiService.postRegister(user)))
+        } catch (e: Exception) {
             Log.e(TAG, "OnFailure: $e")
             emit(NetworkResult.Error(e.message.orEmpty()))
         }

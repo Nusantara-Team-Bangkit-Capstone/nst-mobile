@@ -50,6 +50,12 @@ class LoginFragment : Fragment() {
             val email = binding?.emailEditText?.text.toString().trim()
             val password = binding?.passwordEditText?.text.toString().trim()
             val user = User(email = email, password = password)
+            if (email.isEmpty()) {
+                binding?.emailTextInput?.error = "Email required"
+            }
+            if (password.isEmpty()) {
+                binding?.passwordTextInput?.error = "Password required"
+            }
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(activity, "Email atau Password Wajib diisi", Toast.LENGTH_SHORT)
                     .show()
@@ -71,6 +77,7 @@ class LoginFragment : Fragment() {
                                 sharedPreferences?.edit()?.putString("token", token)?.apply()
                                 val intent = Intent(activity, HomeActivity::class.java)
                                 startActivity(intent)
+
                             }
 
                             is NetworkResult.Error -> {

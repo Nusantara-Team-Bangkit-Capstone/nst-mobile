@@ -1,8 +1,9 @@
 package com.example.perigigiapps.network.api
 
 import com.example.perigigiapps.data.entity.User
-import com.example.perigigiapps.network.response.LoginResponse
 import com.example.perigigiapps.network.response.dummyResponse
+import com.example.perigigiapps.network.response.login.LoginResponse
+import com.example.perigigiapps.network.response.register.RegisterResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -15,4 +16,9 @@ interface ApiService {
     suspend fun postLogin(
         @Body user: User
     ): LoginResponse
+
+    @POST("user")
+    suspend fun postRegister(
+        @Body user: User
+    ): RegisterResponse
 }

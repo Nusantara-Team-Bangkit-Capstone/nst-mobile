@@ -26,4 +26,5 @@
     <string name="tv_item_title">Title</string>
     <string name="tv_item_description">Description</string>
     <string name="article_kesehatan">Artikel Kesehatan</string>
+    <string name="jenis_kelamin">Jenis Kelamin</string>
 </resources>

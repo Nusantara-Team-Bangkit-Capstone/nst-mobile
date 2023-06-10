@@ -3,6 +3,7 @@ package com.example.perigigiapps.di
 import com.example.perigigiapps.data.repository.ArticleRepository
 import com.example.perigigiapps.data.repository.UserRepository
 import com.example.perigigiapps.network.api.ApiConfig
+import com.example.perigigiapps.network.api.TeethApiConfig
 import com.example.perigigiapps.network.api.dummyApiConfig
 
 object Injection {
@@ -13,6 +14,11 @@ object Injection {
 
     fun provideUserRepository(): UserRepository {
         val apiService = ApiConfig.getApiService()
+        return UserRepository.getInstance(apiService)
+    }
+
+    fun provideImageRepository(): UserRepository {
+        val apiService = TeethApiConfig.getApiService()
         return UserRepository.getInstance(apiService)
     }
 }

@@ -1,12 +1,14 @@
 package com.example.perigigiapps.ui.screen.profile
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import com.auth0.android.jwt.JWT
+import com.example.perigigiapps.MainActivity
 import com.example.perigigiapps.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -22,17 +24,33 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
-
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val textView: TextView = binding.textProfile
-        profileViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.constraintLogout.setOnClickListener {
+            logout()
         }
-        return root
+        val sharedPreferences = activity?.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val token = sharedPreferences?.getString("token", "").orEmpty()
+
+        val jwt = JWT(token)
+        val name = jwt.getClaim("name").asString()
+        val email = jwt.getClaim("email").asString()
+        binding.itemNameUser.text = name
+        binding.itemEmailUser.text = email
+    }
+
+
+    private fun logout() {
+        val sharedPreferences = activity?.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        sharedPreferences?.edit()?.remove("token")?.apply()
+        sharedPreferences?.edit()?.clear()?.apply()
+        val intent = Intent(activity, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
     }
 
     override fun onDestroyView() {

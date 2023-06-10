@@ -1,13 +1,17 @@
 package com.example.perigigiapps.ui.screen.deteksi
 
+import android.Manifest
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
+import com.example.perigigiapps.R
 import com.example.perigigiapps.databinding.FragmentDeteksiBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class DeteksiFragment : Fragment() {
 
@@ -22,21 +26,36 @@ class DeteksiFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val deteksiViewModel =
-            ViewModelProvider(this).get(DeteksiViewModel::class.java)
-
         _binding = FragmentDeteksiBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val textView: TextView = binding.textDeteksi
-        deteksiViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val sectionPagerAdapter = activity?.let { SectionPagerAdapter(it) }
+        val viewPager: ViewPager2 = binding.viewPager
+        viewPager.adapter = sectionPagerAdapter
+        val tabs: TabLayout = binding.tabs
+        TabLayoutMediator(tabs, viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        @StringRes
+        private val TAB_TITLES = intArrayOf(
+            R.string.tab_text_1,
+            R.string.tab_text_2
+        )
+
+        private val REQUIRED_PERMISSIONS = arrayOf(
+            Manifest.permission.CAMERA,
+        )
+        private const val REQUEST_CODE_PERMISSIONS = 10
     }
 }

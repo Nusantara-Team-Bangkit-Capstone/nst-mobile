@@ -6,6 +6,7 @@ import com.example.perigigiapps.data.entity.User
 import com.example.perigigiapps.network.NetworkResult
 import com.example.perigigiapps.network.api.ApiService
 import kotlinx.coroutines.Dispatchers
+import okhttp3.MultipartBody
 
 class UserRepository(private val apiService: ApiService) {
     fun login(user: User) = liveData(Dispatchers.IO) {
@@ -21,6 +22,16 @@ class UserRepository(private val apiService: ApiService) {
         emit(NetworkResult.Loading)
         try {
             emit(NetworkResult.Success(apiService.postRegister(user)))
+        } catch (e: Exception) {
+            Log.e(TAG, "OnFailure: $e")
+            emit(NetworkResult.Error(e.message.orEmpty()))
+        }
+    }
+
+    fun predict(imageMultipart: MultipartBody.Part) = liveData(Dispatchers.IO) {
+        emit(NetworkResult.Loading)
+        try {
+            emit(NetworkResult.Success(apiService.postPredict(imageMultipart)))
         } catch (e: Exception) {
             Log.e(TAG, "OnFailure: $e")
             emit(NetworkResult.Error(e.message.orEmpty()))

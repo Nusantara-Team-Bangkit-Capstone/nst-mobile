@@ -10,7 +10,7 @@
     <string name="invalid_email">Not a valid email</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login">Login</string>
-    <string name="email">Rmail</string>
+    <string name="email">Email</string>
     <string name="shr_hint_email">Email</string>
     <string name="shr_hint_password">Password</string>
     <string name="imagelogo">imagelogo</string>
@@ -27,4 +27,14 @@
     <string name="tv_item_description">Description</string>
     <string name="article_kesehatan">Artikel Kesehatan</string>
     <string name="jenis_kelamin">Jenis Kelamin</string>
+    <string name="account">account</string>
+    <string name="change">Ubah Akun</string>
+    <string name="setting">Pengaturan</string>
+    <string name="logout">Keluar</string>
+    <string name="tab_text_1">Periksa Gigi</string>
+    <string name="tab_text_2">Riwayat Periksa</string>
+    <string name="image">image</string>
+    <string name="kamera">kamera</string>
+    <string name="galeri">galeri</string>
+    <string name="unggah">unggah</string>
 </resources>

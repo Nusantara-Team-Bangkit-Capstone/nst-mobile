@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import com.auth0.android.jwt.JWT
 import com.example.perigigiapps.MainActivity
 import com.example.perigigiapps.databinding.FragmentProfileBinding
+import com.squareup.picasso.Picasso
+
 
 class ProfileFragment : Fragment() {
 
@@ -39,8 +41,11 @@ class ProfileFragment : Fragment() {
         val jwt = JWT(token)
         val name = jwt.getClaim("name").asString()
         val email = jwt.getClaim("email").asString()
+        val photo = jwt.getClaim("foto").asString()
         binding.itemNameUser.text = name
         binding.itemEmailUser.text = email
+
+        Picasso.get().load(photo).into(binding.imgItemPhoto);
     }
 
 

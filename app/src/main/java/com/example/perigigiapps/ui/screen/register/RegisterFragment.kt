@@ -70,7 +70,7 @@ class RegisterFragment : Fragment() {
             )
             if (name.isEmpty() || address.isEmpty() || email.isEmpty() || password.isEmpty() || gender.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(
                     email.trim()
-                ).matches()
+                ).matches() || password.trim().length < 8
             ) {
                 validation()
             } else {
@@ -107,11 +107,12 @@ class RegisterFragment : Fragment() {
         if (email.isEmpty()) {
             binding.emailTextInputRegister.error = "Email required"
         }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches() && !email.isEmpty()) {
-            binding.emailTextInputRegister.error = "Invalid Email"
-        }
         if (password.isEmpty()) {
             binding.passwordTextInputRegister.error = "Password required"
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches() && !email.isEmpty()) {
+            binding.emailTextInputRegister.error = "Invalid Email"
+        } else if (password.trim().length < 8) {
+            binding.passwordTextInputRegister.error = "Password minimum 8"
         }
         if (name.isEmpty()) {
             binding.nameTextInputRegister.error = "Name required"

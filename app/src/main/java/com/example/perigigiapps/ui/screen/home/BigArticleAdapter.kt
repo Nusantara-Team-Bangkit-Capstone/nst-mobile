@@ -1,11 +1,13 @@
 package com.example.perigigiapps.ui.screen.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.perigigiapps.databinding.ItemArticleBigBinding
 import com.example.perigigiapps.network.response.ArticlesItem
+import com.example.perigigiapps.ui.screen.detail.DetailFragment
 
 class BigArticleAdapter(private val listArticle: List<ArticlesItem>) :
     RecyclerView.Adapter<BigArticleAdapter.ViewHolder>() {
@@ -17,7 +19,7 @@ class BigArticleAdapter(private val listArticle: List<ArticlesItem>) :
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val article = listArticle[position]
-        val id = article.source?.id
+        val id = article.source?.id.toString()
         val title = article.title
         val description = article.description
         val photo = article.urlToImage
@@ -25,11 +27,11 @@ class BigArticleAdapter(private val listArticle: List<ArticlesItem>) :
         Glide.with(viewHolder.itemView.context)
             .load(photo)
             .into(viewHolder.binding.ivItemPhoto)
-//        viewHolder.itemView.setOnClickListener{
-//            val intentDetail = Intent(viewHolder.itemView.context, DetailStoryActivity::class.java)
-//            intentDetail.putExtra(DetailStoryActivity.id, id)
-//            viewHolder.itemView.context.startActivity(intentDetail)
-//        }
+        viewHolder.itemView.setOnClickListener {
+            val intentDetail = Intent(viewHolder.itemView.context, HomeFragment::class.java)
+            intentDetail.putExtra(DetailFragment.id, id)
+            viewHolder.itemView.context.startActivity(intentDetail)
+        }
     }
 
     override fun getItemCount() = listArticle.size

@@ -80,7 +80,7 @@ class SectionFragment : Fragment() {
             val file = reduceFileImage(getFile as File)
             val requestImageFile = file.asRequestBody("image/*".toMediaType())
             val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-                "photo",
+                "file",
                 file.name,
                 requestImageFile
             )

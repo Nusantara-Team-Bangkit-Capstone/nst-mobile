@@ -8,7 +8,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="invalid_email">Not a valid email</string>
-    <string name="invalid_password">Password must be >5 characters</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="shr_hint_email">Email</string>
@@ -18,17 +17,15 @@
     <string name="not_yet">Belum memiliki akun?</string>
     <string name="daftar">Daftar</string>
     <string name="nama_hint">Nama</string>
-    <string name="gender_man">Laki-Laki</string>
-    <string name="gender_woman">Perempuan</string>
     <string name="address_hint">Alamat</string>
     <string name="register">Register</string>
     <string name="already_yet">Anda Sudah Memiliki Akun?</string>
     <string name="tv_item_title">Title</string>
-    <string name="tv_item_description">Description</string>
     <string name="article_kesehatan">Artikel Kesehatan</string>
     <string name="jenis_kelamin">Jenis Kelamin</string>
     <string name="account">account</string>
     <string name="change">Ubah Akun</string>
+    <string name="delete">Hapus Akun</string>
     <string name="setting">Pengaturan</string>
     <string name="logout">Keluar</string>
     <string name="tab_text_1">Periksa Gigi</string>
@@ -37,4 +34,9 @@
     <string name="kamera">kamera</string>
     <string name="galeri">galeri</string>
     <string name="unggah">unggah</string>
+    <string name="title_activity_splashscreen">Splashscreen</string>
+
+    <string name="image_view_item_transform_content_description">Represents an image view in the
+        item
+    </string>
 </resources>

@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.auth0.android.jwt.JWT
 import com.example.perigigiapps.MainActivity
+import com.example.perigigiapps.R
 import com.example.perigigiapps.databinding.FragmentProfileBinding
+import com.example.perigigiapps.ui.screen.login.LoginFragment
 import com.squareup.picasso.Picasso
 
 
@@ -32,6 +35,9 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.constraintSetting.setOnClickListener {
+            setting()
+        }
         binding.constraintLogout.setOnClickListener {
             logout()
         }
@@ -45,7 +51,27 @@ class ProfileFragment : Fragment() {
         binding.itemNameUser.text = name
         binding.itemEmailUser.text = email
 
-        Picasso.get().load(photo).into(binding.imgItemPhoto);
+        if (photo.isNullOrEmpty()) {
+            binding.imgItemPhoto.setImageResource(R.drawable.avatar_male)
+        }
+        else {
+            Picasso.get().load(photo).into(binding.imgItemPhoto);
+        }
+    }
+
+    private fun setting() {
+        val accountSettingFragment = AccountSettingFragment()
+
+        // Get the FragmentManager and start a transaction
+        val fragmentManager = requireActivity().supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        // Replace the current fragment with the account setting fragment
+        fragmentTransaction.replace(R.id.frame_container, accountSettingFragment)
+        fragmentTransaction.addToBackStack(null) // Optional: Add to back stack if desired
+
+        // Commit the transaction
+        fragmentTransaction.commit()
     }
 
 

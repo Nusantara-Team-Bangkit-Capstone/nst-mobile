@@ -4,6 +4,7 @@
     package="com.example.perigigiapps">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -17,10 +18,13 @@
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
+
             <category android:name="android.intent.category.BROWSABLE" />
+
             <data android:scheme="https" />
         </intent>
     </queries>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -31,6 +35,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PeriGigiApps"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.screen.splashscreen.SplashScreen"
+            android:exported="true"
+            android:label="@string/title_activity_splashscreen"
+            android:resizeableActivity="true"
+            android:theme="@style/Theme.PeriGigiApps.NoActionBar"
+            tools:targetApi="24">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.perigigiapps"
@@ -51,11 +68,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

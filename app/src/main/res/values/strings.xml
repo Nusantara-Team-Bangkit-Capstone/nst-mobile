@@ -6,8 +6,9 @@
     <string name="title_konsultasi">Konsultasi</string>
     <string name="title_profile">Profil</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="splashscreen2_text">Periksa Kesehatan Gigi Secara Berkala. Jangan Tunggu Sampai Sakit.</string>
     <string name="invalid_email">Not a valid email</string>
+    <string name="hello_blank_fragment">Blank Fragment</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="shr_hint_email">Email</string>
@@ -39,4 +40,6 @@
     <string name="image_view_item_transform_content_description">Represents an image view in the
         item
     </string>
+    <string name="splascreen2_text">Scan dan Periksa Gigi Anda Sekarang!</string>
+    <string name="btn_text_periksa_sekarang">Periksa Sekarang</string>
 </resources>

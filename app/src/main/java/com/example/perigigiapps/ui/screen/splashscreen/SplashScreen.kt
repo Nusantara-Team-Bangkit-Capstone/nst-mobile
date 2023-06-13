@@ -1,13 +1,14 @@
 package com.example.perigigiapps.ui.screen.splashscreen
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
-import com.example.perigigiapps.MainActivity
 import com.example.perigigiapps.R
+import com.example.perigigiapps.ui.screen.home.HomeActivity
 
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,9 +21,9 @@ class SplashScreen : AppCompatActivity() {
         )
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, InformationSplashScreen::class.java)
             startActivity(intent)
             finish()
-        }, 3000)
+        }, 2500)
     }
 }

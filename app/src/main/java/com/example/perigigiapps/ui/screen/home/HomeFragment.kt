@@ -1,5 +1,6 @@
 package com.example.perigigiapps.ui.screen.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.auth0.android.jwt.JWT
 import com.example.perigigiapps.databinding.FragmentHomeBinding
 import com.example.perigigiapps.di.Injection
 import com.example.perigigiapps.network.NetworkResult
@@ -34,6 +36,15 @@ class HomeFragment : Fragment() {
             ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        val sharedPreferences = activity?.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val token = sharedPreferences?.getString("token", "").orEmpty()
+
+        val jwt = JWT(token)
+        val name = jwt.getClaim("name").asString()
+        binding.tvNameUser.text = name
+
+
         val root: View = binding.root
 //        (activity as AppCompatActivity).supportActionBar?.hide()
 //        val textView: TextView = binding.textHome

@@ -6,13 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.auth0.android.jwt.JWT
 import com.example.perigigiapps.MainActivity
 import com.example.perigigiapps.R
 import com.example.perigigiapps.databinding.FragmentProfileBinding
-import com.example.perigigiapps.ui.screen.login.LoginFragment
 import com.squareup.picasso.Picasso
 
 
@@ -67,7 +65,7 @@ class ProfileFragment : Fragment() {
         val fragmentTransaction = fragmentManager.beginTransaction()
 
         // Replace the current fragment with the account setting fragment
-        fragmentTransaction.replace(R.id.frame_container, accountSettingFragment)
+        fragmentTransaction.replace(R.id.container, accountSettingFragment)
         fragmentTransaction.addToBackStack(null) // Optional: Add to back stack if desired
 
         // Commit the transaction

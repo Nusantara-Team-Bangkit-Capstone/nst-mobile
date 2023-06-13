@@ -36,6 +36,10 @@
         android:theme="@style/Theme.PeriGigiApps"
         tools:targetApi="31">
         <activity
+            android:name=".ui.screen.splashscreen.InformationSplashScreen"
+            android:theme="@style/Theme.PeriGigiApps.NoActionBar"
+            android:exported="false" />
+        <activity
             android:name=".ui.screen.splashscreen.SplashScreen"
             android:exported="true"
             android:label="@string/title_activity_splashscreen"
@@ -44,6 +48,7 @@
             tools:targetApi="24">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -67,8 +72,11 @@
             android:label="@string/title_activity_home" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

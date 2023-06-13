@@ -79,5 +79,9 @@ dependencies {
     //    Jwt decode
     implementation 'com.auth0.android:jwtdecode:2.0.2'
 
+    //     Load Image from URL
     implementation 'com.squareup.picasso:picasso:2.8'
+
+    //    Shimmer Effect Loading
+    implementation 'com.github.rasoulmiri:skeleton:v1.1.6'
 }

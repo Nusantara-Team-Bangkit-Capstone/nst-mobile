@@ -13,13 +13,25 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
+        bundle {
+            language {
+                enableSplit = true
+            }
+            density {
+                enableSplit = true
+            }
+            abi {
+                enableSplit = true
+            }
+        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

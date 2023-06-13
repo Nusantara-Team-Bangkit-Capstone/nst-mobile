@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.perigigiapps.data.repository.UserRepository
 import com.example.perigigiapps.network.NetworkResult
 import com.example.perigigiapps.network.response.deteksi.HasilDeteksiResponse
+import com.example.perigigiapps.network.response.deteksi.RiwayatDeteksiResponse
 import okhttp3.MultipartBody
 
 class DeteksiViewModel(private val userRepository: UserRepository) : ViewModel() {
@@ -14,6 +15,12 @@ class DeteksiViewModel(private val userRepository: UserRepository) : ViewModel()
             LiveData<NetworkResult<HasilDeteksiResponse>> {
         val tokenUser = "Bearer $token"
         return userRepository.predict(imageMultipart, id, tokenUser)
+    }
+
+    fun getHistory(id: Int?, token: String):
+            LiveData<NetworkResult<RiwayatDeteksiResponse>> {
+        val tokenUser = "Bearer $token"
+        return userRepository.history(id = id, token = tokenUser)
     }
 
     class DeteksiViewModelFactory(private val userRepository: UserRepository) :

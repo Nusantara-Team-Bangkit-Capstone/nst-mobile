@@ -43,7 +43,7 @@ interface ApiService {
 
     @GET("history/{id}")
     suspend fun getHistory(
-        @Path("id") id: Int,
+        @Path("id") id: Int?,
         @Header("Authorization") token: String
     ): RiwayatDeteksiResponse
 }

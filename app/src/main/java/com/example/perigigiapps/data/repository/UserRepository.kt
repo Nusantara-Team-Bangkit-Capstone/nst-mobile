@@ -39,7 +39,17 @@ class UserRepository(private val apiService: ApiService) {
             }
         }
 
-    //    fun history()
+    fun history(token: String, id: Int?) =
+        liveData(Dispatchers.IO) {
+            emit(NetworkResult.Loading)
+            try {
+                emit(NetworkResult.Success(apiService.getHistory(id, token)))
+            } catch (e: Exception) {
+                Log.e(TAG, "OnFailure: $e")
+                emit(NetworkResult.Error(e.message.orEmpty()))
+            }
+        }
+
     companion object {
         @Volatile
         private var instance: UserRepository? = null

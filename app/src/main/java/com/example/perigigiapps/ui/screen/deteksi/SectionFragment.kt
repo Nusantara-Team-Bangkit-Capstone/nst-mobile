@@ -16,6 +16,7 @@ import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.auth0.android.jwt.JWT
 import com.example.perigigiapps.databinding.FragmentSectionBinding
 import com.example.perigigiapps.di.Injection
@@ -34,6 +35,7 @@ class SectionFragment : Fragment() {
     private val binding get() = _binding!!
     private var getFile: File? = null
     private lateinit var deteksiViewModel: DeteksiViewModel
+    private lateinit var historyAdapter: HistoryAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,6 +46,9 @@ class SectionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var position: Int? = 0
+        val userRepository = Injection.provideUserRepository()
+        val factory = DeteksiViewModel.DeteksiViewModelFactory(userRepository)
+        deteksiViewModel = ViewModelProvider(this, factory)[DeteksiViewModel::class.java]
         arguments?.let {
             position = it.getInt(ARG_POSITION)
         }
@@ -63,18 +68,49 @@ class SectionFragment : Fragment() {
                 uploadButton.isVisible = false
                 galleryButton.isVisible = false
                 divider.isVisible = false
-                rvHistory.isVisible = true
+                history()
             }
         }
-
-        val userRepository = Injection.provideUserRepository()
-        val factory = DeteksiViewModel.DeteksiViewModelFactory(userRepository)
-        deteksiViewModel = ViewModelProvider(this, factory)[DeteksiViewModel::class.java]
 
         binding.cameraButton.setOnClickListener { startTakePhoto() }
         binding.galleryButton.setOnClickListener { startGallery() }
         binding.uploadButton.setOnClickListener { uploadImage() }
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun history() {
+        val sharedPreferences = activity?.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val token = sharedPreferences?.getString("token", "").orEmpty()
+        val jwt = JWT(token)
+        val id = jwt.getClaim("id").asInt()
+        deteksiViewModel.getHistory(id, token = token)
+            .observe(viewLifecycleOwner) { result ->
+                if (result != null) {
+                    when (result) {
+                        is NetworkResult.Loading -> {
+                            binding.progressBar.isVisible = true
+                        }
+
+                        is NetworkResult.Success -> {
+                            binding.progressBar.isVisible = false
+                            val response = result.data.data
+                            historyAdapter = HistoryAdapter(response!!)
+                            binding.rvHistory.layoutManager = LinearLayoutManager(
+                                requireContext(),
+                                LinearLayoutManager.VERTICAL,
+                                false
+                            )
+                            binding.rvHistory.adapter = historyAdapter
+                        }
+
+                        is NetworkResult.Error -> {
+                            binding.progressBar.isVisible = false
+                            Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+                }
+            }
     }
 
     private fun uploadImage() {

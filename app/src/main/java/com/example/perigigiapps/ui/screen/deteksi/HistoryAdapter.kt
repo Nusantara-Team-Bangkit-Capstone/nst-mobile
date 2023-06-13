@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.perigigiapps.databinding.ItemCardProfileBinding
-import com.example.perigigiapps.network.response.ArticlesItem
+import com.example.perigigiapps.network.response.deteksi.DataItem
 
-class HistoryAdapter(private val listArticle: List<ArticlesItem>) :
+class HistoryAdapter(private val listHistory: List<DataItem?>) :
     RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -16,11 +16,11 @@ class HistoryAdapter(private val listArticle: List<ArticlesItem>) :
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val article = listArticle[position]
-        val id = article.source?.id.toString()
-        val title = article.title
-        val description = article.description
-        val photo = article.urlToImage
+        val history = listHistory[position]
+        val id = history?.id
+        val title = history?.scanningResult
+        val description = history?.scanningDate
+        val photo = history?.toothImg
         viewHolder.binding.tvItemName.text = title
         viewHolder.binding.tvItemDescription.text = description
         Glide.with(viewHolder.itemView.context)
@@ -33,7 +33,7 @@ class HistoryAdapter(private val listArticle: List<ArticlesItem>) :
 //        }
     }
 
-    override fun getItemCount() = listArticle.size
+    override fun getItemCount() = listHistory.size
 
     class ViewHolder(var binding: ItemCardProfileBinding) : RecyclerView.ViewHolder(binding.root)
 }

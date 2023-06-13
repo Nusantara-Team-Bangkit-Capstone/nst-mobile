@@ -13,6 +13,10 @@ class HomeViewModel(private val articleRepository: ArticleRepository) : ViewMode
         return articleRepository.getArticles()
     }
 
+    fun getAnotherArticles(): LiveData<NetworkResult<dummyResponse>> {
+        return articleRepository.getAnotherArticles()
+    }
+
     class HomeViewModelFactory(private val articleRepository: ArticleRepository) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

@@ -20,6 +20,7 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private lateinit var articleAdapter: BigArticleAdapter
+    private lateinit var anotherArticleAdapter: SmallArticleAdapter
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -58,6 +59,31 @@ class HomeFragment : Fragment() {
                     is NetworkResult.Error -> {
                         binding.progressBar.isVisible = false
                         Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
+        homeViewModel.getAnotherArticles().observe(viewLifecycleOwner) { result ->
+            if (result != null) {
+                when (result) {
+                    is NetworkResult.Loading -> {
+
+                    }
+
+                    is NetworkResult.Success -> {
+                        val response = result.data.articles
+                        anotherArticleAdapter = response?.let { SmallArticleAdapter(it) }!!
+                        binding.rvAnother.layoutManager = LinearLayoutManager(
+                            requireContext(),
+                            LinearLayoutManager.VERTICAL,
+                            false
+                        )
+                        binding.rvAnother.adapter = anotherArticleAdapter
+                    }
+
+                    is NetworkResult.Error -> {
+
                     }
                 }
             }

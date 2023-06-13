@@ -14,7 +14,7 @@ class TeethApiConfig {
                 .addInterceptor(loggingInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://predict-api-nb6hkmg4ia-et.a.run.app/api/")
+                .baseUrl("https://cloudrun-dev-env-nb6hkmg4ia-et.a.run.app/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

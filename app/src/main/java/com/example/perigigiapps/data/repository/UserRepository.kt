@@ -28,16 +28,18 @@ class UserRepository(private val apiService: ApiService) {
         }
     }
 
-    fun predict(imageMultipart: MultipartBody.Part) = liveData(Dispatchers.IO) {
-        emit(NetworkResult.Loading)
-        try {
-            emit(NetworkResult.Success(apiService.postPredict(imageMultipart)))
-        } catch (e: Exception) {
-            Log.e(TAG, "OnFailure: $e")
-            emit(NetworkResult.Error(e.message.orEmpty()))
+    fun predict(imageMultipart: MultipartBody.Part, id: Int?, token: String) =
+        liveData(Dispatchers.IO) {
+            emit(NetworkResult.Loading)
+            try {
+                emit(NetworkResult.Success(apiService.postPredict(imageMultipart, id, token)))
+            } catch (e: Exception) {
+                Log.e(TAG, "OnFailure: $e")
+                emit(NetworkResult.Error(e.message.orEmpty()))
+            }
         }
-    }
 
+    //    fun history()
     companion object {
         @Volatile
         private var instance: UserRepository? = null

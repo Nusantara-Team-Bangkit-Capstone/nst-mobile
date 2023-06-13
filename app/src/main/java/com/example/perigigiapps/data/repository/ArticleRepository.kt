@@ -18,6 +18,16 @@ class ArticleRepository(private val apiService: ApiService) {
         }
     }
 
+    fun getAnotherArticles() = liveData(Dispatchers.IO) {
+        emit(NetworkResult.Loading)
+        try {
+            emit(NetworkResult.Success(apiService.getArticles2()))
+        } catch (e: Exception) {
+            Log.e(TAG, "OnFailure: $e")
+            emit(NetworkResult.Error(e.message.orEmpty()))
+        }
+    }
+
     companion object {
         @Volatile
         private var instance: ArticleRepository? = null

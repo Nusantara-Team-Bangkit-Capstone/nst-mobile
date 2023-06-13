@@ -1,5 +1,6 @@
 package com.example.perigigiapps.ui.screen.deteksi
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -15,6 +16,7 @@ import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.auth0.android.jwt.JWT
 import com.example.perigigiapps.databinding.FragmentSectionBinding
 import com.example.perigigiapps.di.Injection
 import com.example.perigigiapps.network.NetworkResult
@@ -65,7 +67,7 @@ class SectionFragment : Fragment() {
             }
         }
 
-        val userRepository = Injection.provideImageRepository()
+        val userRepository = Injection.provideUserRepository()
         val factory = DeteksiViewModel.DeteksiViewModelFactory(userRepository)
         deteksiViewModel = ViewModelProvider(this, factory)[DeteksiViewModel::class.java]
 
@@ -76,6 +78,11 @@ class SectionFragment : Fragment() {
     }
 
     private fun uploadImage() {
+        val sharedPreferences = activity?.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val token = sharedPreferences?.getString("token", "").orEmpty()
+
+        val jwt = JWT(token)
+        val id = jwt.getClaim("id").asInt()
         if (getFile != null) {
             val file = reduceFileImage(getFile as File)
             val requestImageFile = file.asRequestBody("image/*".toMediaType())
@@ -84,20 +91,21 @@ class SectionFragment : Fragment() {
                 file.name,
                 requestImageFile
             )
-            deteksiViewModel.postPredict(imageMultipart).observe(viewLifecycleOwner) { result ->
-                if (result != null) {
-                    when (result) {
-                        is NetworkResult.Loading -> {
-                            binding.progressBar.isVisible = true
-                        }
+            deteksiViewModel.postPredict(imageMultipart, id, token = token)
+                .observe(viewLifecycleOwner) { result ->
+                    if (result != null) {
+                        when (result) {
+                            is NetworkResult.Loading -> {
+                                binding.progressBar.isVisible = true
+                            }
 
-                        is NetworkResult.Success -> {
-                            binding.progressBar.isVisible = false
-                            Toast.makeText(
-                                requireContext(),
-                                result.data.data,
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            is NetworkResult.Success -> {
+                                binding.progressBar.isVisible = false
+                                Toast.makeText(
+                                    requireContext(),
+                                    result.data.data?.scanningResult,
+                                    Toast.LENGTH_SHORT
+                                ).show()
                         }
 
                         is NetworkResult.Error -> {

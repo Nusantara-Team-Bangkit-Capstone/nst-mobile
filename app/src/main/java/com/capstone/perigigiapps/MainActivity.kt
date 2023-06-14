@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.perigigiapps.ui.screen.home.HomeActivity
 import com.capstone.perigigiapps.ui.screen.login.LoginFragment
+import com.example.perigigiapps.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

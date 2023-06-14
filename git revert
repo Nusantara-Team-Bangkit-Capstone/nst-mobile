@@ -1,0 +1,416 @@
+[33mcommit e921503dcf3c5714587980d60d6d1910cad77aae[m[33m ([m[1;36mHEAD -> [m[1;32mRahadian-Development[m[33m, [m[1;31morigin/Rahadian-Development[m[33m)[m
+Author: Rahanug <rahanug@gmail.com>
+Date:   Wed Jun 7 13:18:21 2023 +0700
+
+    Login Connect to Api Successful
+
+[1mdiff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d90aa92[m
+[1m--- /dev/null[m
+[1m+++ b/.idea/deploymentTargetDropDown.xml[m
+[36m@@ -0,0 +1,17 @@[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8"?>[m
+[32m+[m[32m<project version="4">[m
+[32m+[m[32m  <component name="deploymentTargetDropDown">[m
+[32m+[m[32m    <targetSelectedWithDropDown>[m
+[32m+[m[32m      <Target>[m
+[32m+[m[32m        <type value="QUICK_BOOT_TARGET" />[m
+[32m+[m[32m        <deviceKey>[m
+[32m+[m[32m          <Key>[m
+[32m+[m[32m            <type value="VIRTUAL_DEVICE_PATH" />[m
+[32m+[m[32m            <value value="C:\Users\Rahadian\.android\avd\Pixel_XL_API_32.avd" />[m
+[32m+[m[32m          </Key>[m
+[32m+[m[32m        </deviceKey>[m
+[32m+[m[32m      </Target>[m
+[32m+[m[32m    </targetSelectedWithDropDown>[m
+[32m+[m[32m    <timeTargetWasSelectedWithDropDown value="2023-06-02T09:32:24.989812Z" />[m
+[32m+[m[32m  </component>[m
+[32m+[m[32m</project>[m
+\ No newline at end of file[m
+[1mdiff --git a/app/build.gradle b/app/build.gradle[m
+[1mindex ec99c13..98e8c2f 100644[m
+[1m--- a/app/build.gradle[m
+[1m+++ b/app/build.gradle[m
+[36m@@ -46,4 +46,15 @@[m [mdependencies {[m
+     testImplementation 'junit:junit:4.13.2'[m
+     androidTestImplementation 'androidx.test.ext:junit:1.1.5'[m
+     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'[m
+[32m+[m[32m    implementation 'com.squareup.retrofit2:retrofit:2.9.0'[m
+[32m+[m[32m    implementation "com.squareup.retrofit2:converter-gson:2.9.0"[m
+[32m+[m[32m    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"[m
+[32m+[m
+[32m+[m[32m    //    Camera[m
+[32m+[m[32m    implementation 'com.github.bumptech.glide:glide:4.11.0'[m
+[32m+[m[32m    implementation "androidx.camera:camera-camera2:1.2.2"[m
+[32m+[m[32m//    LiveData[m
+[32m+[m[32m    implementation "androidx.camera:camera-lifecycle:1.2.2"[m
+[32m+[m[32m    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"[m
+[32m+[m[32m    implementation "androidx.camera:camera-view:1.2.2"[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml[m
+[1mindex 4fb51cc..7b31c5d 100644[m
+[1m--- a/app/src/main/AndroidManifest.xml[m
+[1m+++ b/app/src/main/AndroidManifest.xml[m
+[36m@@ -1,7 +1,7 @@[m
+ <?xml version="1.0" encoding="utf-8"?>[m
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"[m
+     xmlns:tools="http://schemas.android.com/tools">[m
+[31m-[m
+[32m+[m[32m    <uses-permission android:name="android.permission.INTERNET" />[m
+     <application[m
+         android:allowBackup="true"[m
+         android:dataExtractionRules="@xml/data_extraction_rules"[m
+[1mdiff --git a/app/src/main/java/com/example/perigigiapps/data/entity/User.kt b/app/src/main/java/com/example/perigigiapps/data/entity/User.kt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3d69011[m
+[1m--- /dev/null[m
+[1m+++ b/app/src/main/java/com/example/perigigiapps/data/entity/User.kt[m
+[36m@@ -0,0 +1,6 @@[m
+[32m+[m[32mpackage com.example.perigigiapps.data.entity[m
+[32m+[m
+[32m+[m[32mdata class User([m
+[32m+[m[32m    val email: String,[m
+[32m+[m[32m    val password: String[m
+[32m+[m[32m)[m
+[1mdiff --git a/app/src/main/java/com/example/perigigiapps/data/repository/ArticleRepository.kt b/app/src/main/java/com/example/perigigiapps/data/repository/ArticleRepository.kt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d64f71c[m
+[1m--- /dev/null[m
+[1m+++ b/app/src/main/java/com/example/perigigiapps/data/repository/ArticleRepository.kt[m
+[36m@@ -0,0 +1,33 @@[m
+[32m+[m[32mpackage com.example.perigigiapps.data.repository[m
+[32m+[m
+[32m+[m[32mimport android.util.Log[m
+[32m+[m[32mimport androidx.lifecycle.liveData[m
+[32m+[m[32mimport com.example.perigigiapps.network.NetworkResult[m
+[32m+[m[32mimport com.example.perigigiapps.network.api.ApiService[m
+[32m+[m[32mimport kotlinx.coroutines.Dispatchers[m
+[32m+[m
+[32m+[m
+[32m+[m[32mclass ArticleRepository(private val apiService: ApiService) {[m
+[32m+[m[32m    fun getArticles() = liveData(Dispatchers.IO) {[m
+[32m+[m[32m        emit(NetworkResult.Loading)[m
+[32m+[m[32m        try {[m
+[32m+[m[32m            emit(NetworkResult.Success(apiService.getArticles()))[m
+[32m+[m[32m        } catch (e: Exception) {[m
+[32m+[m[32m            Log.e(TAG, "OnFailure: $e")[m
+[32m+[m[32m            emit(NetworkResult.Error(e.message.orEmpty()))[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    companion object {[m
+[32m+[m[32m        @Volatile[m
+[32m+[m[32m        private var instance: ArticleRepository? = null[m
+[32m+[m[32m        fun getInstance([m
+[32m+[m[32m            apiService: ApiService,[m
+[32m+[m[32m        ): ArticleRepository =[m
+[32m+[m[32m            instance ?: synchronized(this) {[m
+[32m+[m[32m                instance ?: ArticleRepository(apiService)[m
+[32m+[m[32m            }.also { instance = it }[m
+[32m+[m
+[32m+[m[32m        private val TAG = "UserRepository"[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/java/com/example/perigigiapps/data/repository/UserRepository.kt b/app/src/main/java/com/example/perigigiapps/data/repository/UserRepository.kt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e90229d[m
+[1m--- /dev/null[m
+[1m+++ b/app/src/main/java/com/example/perigigiapps/data/repository/UserRepository.kt[m
+[36m@@ -0,0 +1,33 @@[m
+[32m+[m[32mpackage com.example.perigigiapps.data.repository[m
+[32m+[m
+[32m+[m[32mimport android.util.Log[m
+[32m+[m[32mimport androidx.lifecycle.liveData[m
+[32m+[m[32mimport com.example.perigigiapps.data.entity.User[m
+[32m+[m[32mimport com.example.perigigiapps.network.NetworkResult[m
+[32m+[m[32mimport com.example.perigigiapps.network.api.ApiService[m
+[32m+[m[32mimport kotlinx.coroutines.Dispatchers[m
+[32m+[m
+[32m+[m[32mclass UserRepository(private val apiService: ApiService) {[m
+[32m+[m[32m    fun login(user: User) = liveData(Dispatchers.IO) {[m
+[32m+[m[32m        emit(NetworkResult.Loading)[m
+[32m+[m[32m        try {[m
+[32m+[m[32m            emit(NetworkResult.Success(apiService.postLogin(user)))[m
+[32m+[m[32m        } catch (e: Exception) {[m
+[32m+[m[32m            Log.e(TAG, "OnFailure: $e")[m
+[32m+[m[32m            emit(NetworkResult.Error(e.message.orEmpty()))[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    companion object {[m
+[32m+[m[32m        @Volatile[m
+[32m+[m[32m        private var instance: UserRepository? = null[m
+[32m+[m[32m        fun getInstance([m
+[32m+[m[32m            apiService: ApiService,[m
+[32m+[m[32m        ): UserRepository =[m
+[32m+[m[32m            instance ?: synchronized(this) {[m
+[32m+[m[32m                instance ?: UserRepository(apiService)[m
+[32m+[m[32m            }.also { instance = it }[m
+[32m+[m
+[32m+[m[32m        private val TAG = "UserRepository"[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/java/com/example/perigigiapps/di/Injection.kt b/app/src/main/java/com/example/perigigiapps/di/Injection.kt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..aaa8659[m
+[1m--- /dev/null[m
+[1m+++ b/app/src/main/java/com/example/perigigiapps/di/Injection.kt[m
+[36m@@ -0,0 +1,18 @@[m
+[32m+[m[32mpackage com.example.perigigiapps.di[m
+[32m+[m
+[32m+[m[32mimport com.example.perigigiapps.data.repository.ArticleRepository[m
+[32m+[m[32mimport com.example.perigigiapps.data.repository.UserRepository[m
+[32m+[m[32mimport com.example.perigigiapps.network.api.ApiConfig[m
+[32m+[m[32mimport com.example.perigigiapps.network.api.dummyApiConfig[m
+[32m+[m
+[32m+[m[32mobject Injection {[m
+[32m+[m[32m    fun provideArticleRepository(): ArticleRepository {[m
+[32m+[m[32m        val apiService = dummyApiConfig.getApiService()[m
+[32m+[m[32m        return ArticleRepository.getInstance(apiService)[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    fun provideUserRepository(): UserRepository {[m
+[32m+[m[32m        val apiService = ApiConfig.getApiService()[m
+[32m+[m[32m        return UserRepository.getInstance(apiService)[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/java/com/example/perigigiapps/network/NetworkResult.kt b/app/src/main/java/com/example/perigigiapps/network/NetworkResult.kt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..c41164c[m
+[1m--- /dev/null[m
+[1m+++ b/app/src/main/java/com/example/perigigiapps/network/NetworkResult.kt[m
+[36m@@ -0,0 +1,7 @@[m
+[32m+[m[32mpackage com.example.perigigiapps.network[m
+[32m+[m
+[32m+[m[32msealed class NetworkResult<out R> private constructor() {[m
+[32m+[m[32m    data class Success<out T>(val data: T) : NetworkResult<T>()[m
+[32m+[m[32m    data class Error(val error: String) : NetworkResult<Nothing>()[m
+[32m+[m[32m    object Loading : NetworkResult<Nothing>()[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/java/com/example/perigigiapps/network/api/ApiConfig.kt b/app/src/main/java/com/example/perigigiapps/network/api/ApiConfig.kt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..637da4c[m
+[1m--- /dev/null[m
+[1m+++ b/app/src/main/java/com/example/perigigiapps/network/api/ApiConfig.kt[m
+[36m@@ -0,0 +1,24 @@[m
+[32m+[m[32mpackage com.example.perigigiapps.network.api[m
+[32m+[m
+[32m+[m[32mimport okhttp3.OkHttpClient[m
+[32m+[m[32mimport okhttp3.logging.HttpLoggingInterceptor[m
+[32m+[m[32mimport retrofit2.Retrofit[m
+[32m+[m[32mimport retrofit2.converter.gson.GsonConverterFactory[m
+[32m+[m
+[32m+[m[32mclass ApiConfig {[m
+[32m+[m[32m    companion object {[m
+[32m+[m[32m        fun getApiService(): ApiService {[m
+[32m+[m[32m            val loggingInterceptor =[m
+[32m+[m[32m                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)[m
+[32m+[m[32m            val client = OkHttpClient.Builder()[m
+[32m+[m[32m                .addInterceptor(loggingInterceptor)[m
+[32m+[m[32m                .build()[m
+[32m+[m[32m            val retrofit = Retrofit.Builder()[m
+[32m+[m[32m                .baseUrl("https://cloudrun-dev-env-nb6hkmg4ia-et.a.run.app/api/")[m
+[32m+[m[32m                .addConverterFactory(GsonConverterFactory.create())[m
+[32m+[m[32m                .client(client)[m
+[32m+[m[32m                .build()[m
+[32m+[m[32m            return retrofit.create(ApiService::class.java)[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/java/com/example/perigigiapps/network/api/ApiService.kt b/app/src/main/java/com/example/perigigiapps/network/api/ApiService.kt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..dcf9d73[m
+[1m--- /dev/null[m
+[1m+++ b/app/src/main/java/com/example/perigigiapps/network/api/ApiService.kt[m
+[36m@@ -0,0 +1,18 @@[m
+[32m+[m[32mpackage com.example.perigigiapps.network.api[m
+[32m+[m
+[32m+[m[32mimport com.example.perigigiapps.data.entity.User[m
+[32m+[m[32mimport com.example.perigigiapps.network.response.LoginResponse[m
+[32m+[m[32mimport com.example.perigigiapps.network.response.dummyResponse[m
+[32m+[m[32mimport retrofit2.http.Body[m
+[32m+[m[32mimport retrofit2.http.GET[m
+[32m+[m[32mimport retrofit2.http.POST[m
+[32m+[m
+[32m+[m[32minterface ApiService {[m
+[32m+[m[32m    @GET("everything?q=dental%health&sortBy=publishedAt&pageSize=10&apiKey=593e27d61fbb44d383e11ea4422f7a66")[m
+[32m+[m[32m    suspend fun getArticles(): dummyResponse[m
+[32m+[m
+[32m+[m[32m    @POST("login")[m
+[32m+[m[32m    suspend fun postLogin([m
+[32m+[m[32m        @Body user: User[m
+[32m+[m[32m    ): LoginResponse[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/java/com/example/perigigiapps/network/api/dummyApiConfig.kt b/app/src/main/java/com/example/perigigiapps/network/api/dummyApiConfig.kt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..db9fe44[m
+[1m--- /dev/null[m
+[1m+++ b/app/src/main/java/com/example/perigigiapps/network/api/dummyApiConfig.kt[m
+[36m@@ -0,0 +1,24 @@[m
+[32m+[m[32mpackage com.example.perigigiapps.network.api[m
+[32m+[m
+[32m+[m[32mimport okhttp3.OkHttpClient[m
+[32m+[m[32mimport okhttp3.logging.HttpLoggingInterceptor[m
+[32m+[m[32mimport retrofit2.Retrofit[m
+[32m+[m[32mimport retrofit2.converter.gson.GsonConverterFactory[m
+[32m+[m
+[32m+[m[32mclass dummyApiConfig {[m
+[32m+[m[32m    companion object {[m
+[32m+[m[32m        fun getApiService(): ApiService {[m
+[32m+[m[32m            val loggingInterceptor =[m
+[32m+[m[32m                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)[m
+[32m+[m[32m            val client = OkHttpClient.Builder()[m
+[32m+[m[32m                .addInterceptor(loggingInterceptor)[m
+[32m+[m[32m                .build()[m
+[32m+[m[32m            val retrofit = Retrofit.Builder()[m
+[32m+[m[32m                .baseUrl("https://newsapi.org/v2/")[m
+[32m+[m[32m                .addConverterFactory(GsonConverterFactory.create())[m
+[32m+[m[32m                .client(client)[m
+[32m+[m[32m                .build()[m
+[32m+[m[32m            return retrofit.create(ApiService::class.java)[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/java/com/example/perigigiapps/network/response/LoginResponse.kt b/app/src/main/java/com/example/perigigiapps/network/response/LoginResponse.kt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..818a633[m
+[1m--- /dev/null[m
+[1m+++ b/app/src/main/java/com/example/perigigiapps/network/response/LoginResponse.kt[m
+[36m@@ -0,0 +1,18 @@[m
+[32m+[m[32mpackage com.example.perigigiapps.network.response[m
+[32m+[m
+[32m+[m[32mimport com.google.gson.annotations.SerializedName[m
+[32m+[m
+[32m+[m[32mdata class LoginResponse([m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("data")[m
+[32m+[m[32m    val data: Data? = null,[m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("status")[m
+[32m+[m[32m    val status: Boolean? = null[m
+[32m+[m[32m)[m
+[32m+[m
+[32m+[m[32mdata class Data([m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("token")[m
+[32m+[m[32m    val token: String? = null[m
+[32m+[m[32m)[m
+[1mdiff --git a/app/src/main/java/com/example/perigigiapps/network/response/dummyResponse.kt b/app/src/main/java/com/example/perigigiapps/network/response/dummyResponse.kt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3b4fbec[m
+[1m--- /dev/null[m
+[1m+++ b/app/src/main/java/com/example/perigigiapps/network/response/dummyResponse.kt[m
+[36m@@ -0,0 +1,51 @@[m
+[32m+[m[32mpackage com.example.perigigiapps.network.response[m
+[32m+[m
+[32m+[m[32mimport com.google.gson.annotations.SerializedName[m
+[32m+[m
+[32m+[m[32mdata class dummyResponse([m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("totalResults")[m
+[32m+[m[32m    val totalResults: Int? = null,[m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("articles")[m
+[32m+[m[32m    val articles: List<ArticlesItem>? = null,[m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("status")[m
+[32m+[m[32m    val status: String? = null[m
+[32m+[m[32m)[m
+[32m+[m
+[32m+[m[32mdata class ArticlesItem([m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("publishedAt")[m
+[32m+[m[32m    val publishedAt: String? = null,[m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("author")[m
+[32m+[m[32m    val author: String? = null,[m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("urlToImage")[m
+[32m+[m[32m    val urlToImage: String? = null,[m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("description")[m
+[32m+[m[32m    val description: String? = null,[m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("source")[m
+[32m+[m[32m    val source: Source? = null,[m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("title")[m
+[32m+[m[32m    val title: String? = null,[m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("url")[m
+[32m+[m[32m    val url: String? = null,[m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("content")[m
+[32m+[m[32m    val content: String? = null[m
+[32m+[m[32m)[m
+[32m+[m
+[32m+[m[32mdata class Source([m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("name")[m
+[32m+[m[32m    val name: String? = null,[m
+[32m+[m
+[32m+[m[32m    @field:SerializedName("id")[m
+[32m+[m[32m    val id: Any? = null[m
+[32m+[m[32m)[m
+[1mdiff --git a/app/src/main/java/com/example/perigigiapps/ui/screen/home/BigArticleAdapter.kt b/app/src/main/java/com/example/perigigiapps/ui/screen/home/BigArticleAdapter.kt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..bbbc0e2[m
+[1m--- /dev/null[m
+[1m+++ b/app/src/main/java/com/example/perigigiapps/ui/screen/home/BigArticleAdapter.kt[m
+[36m@@ -0,0 +1,38 @@[m
+[32m+[m[32mpackage com.example.perigigiapps.ui.screen.home[m
+[32m+[m
+[32m+[m[32mimport android.view.LayoutInflater[m
+[32m+[m[32mimport android.view.ViewGroup[m
+[32m+[m[32mimport androidx.recyclerview.widget.RecyclerView[m
+[32m+[m[32mimport com.bumptech.glide.Glide[m
+[32m+[m[32mimport com.example.perigigiapps.databinding.ItemArticleBigBinding[m
+[32m+[m[32mimport com.example.perigigiapps.network.response.ArticlesItem[m
+[32m+[m
+[32m+[m[32mclass BigArticleAdapter(private val listArticle: List<ArticlesItem>) :[m
+[32m+[m[32m    RecyclerView.Adapter<BigArticleAdapter.ViewHolder>() {[m
+[32m+[m[32m    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {[m
+[32m+[m[32m        val binding =[m
+[32m+[m[32m            ItemArticleBigBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)[m
+[32m+[m[32m        return ViewHolder(binding)[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {[m
+[32m+[m[32m        val article = listArticle[position][m
+[32m+[m[32m        val id = article.source?.id[m
+[32m+[m[32m        val title = article.title[m
+[32m+[m[32m        val description = article.description[m
+[32m+[m[32m        val photo = article.urlToImage[m
+[32m+[m[32m        viewHolder.binding.tvItemName.text = title[m
+[32m+[m[32m        Glide.with(viewHolder.itemView.context)[m
+[32m+[m[32m            .load(photo)[m
+[32m+[m[32m            .into(viewHolder.binding.ivItemPhoto)[m
+[32m+[m[32m//        viewHolder.itemView.setOnClickListener{[m
+[32m+[m[32m//            val intentDetail = Intent(viewHolder.itemView.context, DetailStoryActivity::class.java)[m
+[32m+[m[32m//            intentDetail.putExtra(DetailStoryActivity.id, id)[m
+[32m+[m[32m//            viewHolder.itemView.context.startActivity(intentDetail)[m
+[32m+[m[32m//        }[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    override fun getItemCount() = listArticle.size[m
+[32m+[m
+[32m+[m[32m    class ViewHolder(var binding: ItemArticleBigBinding) : RecyclerView.ViewHolder(binding.root)[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/java/com/example/perigigiapps/ui/screen/home/HomeFragment.kt b/app/src/main/java/com/example/perigigiapps/ui/screen/home/HomeFragment.kt[m
+[1mindex 7998959..8055407 100644[m
+[1m--- a/app/src/main/java/com/example/perigigiapps/ui/screen/home/HomeFragment.kt[m
+[1m+++ b/app/src/main/java/com/example/perigigiapps/ui/screen/home/HomeFragment.kt[m
+[36m@@ -4,10 +4,14 @@[m [mimport android.os.Bundle[m
+ import android.view.LayoutInflater[m
+ import android.view.View[m
+ import android.v

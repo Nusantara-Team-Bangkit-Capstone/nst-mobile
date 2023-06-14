@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.perigigiapps'
+    namespace 'com.capstone.perigigiapps'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.perigigiapps"
+        applicationId "com.capstone.perigigiapps"
         minSdk 23
         targetSdk 33
         versionCode 1
@@ -29,10 +29,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
-            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig
+            debuggable = false
         }
     }
     compileOptions {
@@ -64,7 +63,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
-    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
 
     //    Camera
     implementation 'com.github.bumptech.glide:glide:4.11.0'
@@ -78,6 +77,8 @@ dependencies {
 
     //    Jwt decode
     implementation 'com.auth0.android:jwtdecode:2.0.2'
-
     implementation 'com.squareup.picasso:picasso:2.8'
+
+//    Sweet Alert Dialog
+    implementation 'com.github.f0ris.sweetalert:library:1.6.2'
 }

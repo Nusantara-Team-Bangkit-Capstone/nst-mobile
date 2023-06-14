@@ -158,7 +158,7 @@ class SectionFragment : Fragment() {
                                         SweetAlertDialog.ERROR_TYPE
                                     )
                                     sweetAlertDialog.titleText = "Gigi Tidak Sehat!"
-                                    sweetAlertDialog.contentText = "Gigi anda tampak sehat"
+                                    sweetAlertDialog.contentText = "Gigi anda tampak tidak sehat"
                                     sweetAlertDialog.show()
                                     sweetAlertDialog.setConfirmClickListener { sweetAlertDialog ->
                                         // Handle Confirm button click

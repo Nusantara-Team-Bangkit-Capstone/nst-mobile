@@ -6,6 +6,9 @@ plugins {
 android {
     namespace 'com.capstone.perigigiapps'
     compileSdk 33
+    dataBinding {
+        enabled = true
+    }
 
     defaultConfig {
         applicationId "com.capstone.perigigiapps"

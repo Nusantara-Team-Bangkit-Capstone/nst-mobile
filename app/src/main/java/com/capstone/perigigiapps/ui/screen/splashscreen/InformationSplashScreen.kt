@@ -1,14 +1,14 @@
-package com.example.perigigiapps.ui.screen.splashscreen
+package com.capstone.perigigiapps.ui.screen.splashscreen
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
-import com.example.perigigiapps.MainActivity
-import com.example.perigigiapps.R
-import com.example.perigigiapps.ui.screen.home.HomeActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.capstone.perigigiapps.MainActivity
+import com.capstone.perigigiapps.R
+import com.capstone.perigigiapps.ui.screen.home.HomeActivity
 
 class InformationSplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

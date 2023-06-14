@@ -81,4 +81,7 @@ dependencies {
 
 //    Sweet Alert Dialog
     implementation 'com.github.f0ris.sweetalert:library:1.6.2'
+
+    //    Shimmer Effect Loading
+    implementation 'com.github.rasoulmiri:skeleton:v1.1.6'
 }

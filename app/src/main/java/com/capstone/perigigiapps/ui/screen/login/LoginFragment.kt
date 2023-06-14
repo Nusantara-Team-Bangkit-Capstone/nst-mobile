@@ -51,7 +51,7 @@ class LoginFragment : Fragment() {
             val password = binding?.passwordEditText?.text.toString().trim()
             val user = User(email = email, password = password)
             if (email.isEmpty()) {
-                binding?.emailTextInput?.error = "Email required"
+                binding?.emailEditText?.error = "Email required"
             }
             if (password.isEmpty()) {
                 binding?.passwordTextInput?.error = "Password required"

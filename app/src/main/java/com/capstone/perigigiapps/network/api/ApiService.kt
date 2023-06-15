@@ -1,11 +1,13 @@
 package com.capstone.perigigiapps.network.api
 
 import com.capstone.perigigiapps.data.entity.User
+import com.capstone.perigigiapps.network.request.messaging.ChatRequest
 import com.capstone.perigigiapps.network.response.deteksi.HasilDeteksiResponse
 import com.capstone.perigigiapps.network.response.deteksi.RiwayatDeteksiResponse
 import com.capstone.perigigiapps.network.response.doctor.ListDoctorResponse
 import com.capstone.perigigiapps.network.response.dummyResponse
 import com.capstone.perigigiapps.network.response.login.LoginResponse
+import com.capstone.perigigiapps.network.response.messaging.MessagingResponse
 import com.capstone.perigigiapps.network.response.register.RegisterResponse
 import okhttp3.MultipartBody
 import retrofit2.http.Body
@@ -52,4 +54,16 @@ interface ApiService {
     suspend fun getAllDoctor(
         @Header("Authorization") token: String
     ): ListDoctorResponse
+
+    @POST("chatting")
+    suspend fun postChat(
+        @Header("Authorization") token: String,
+        @Body chatRequest: ChatRequest
+    )
+
+    @GET("chatting/{id}")
+    suspend fun getChat(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+    ): MessagingResponse
 }

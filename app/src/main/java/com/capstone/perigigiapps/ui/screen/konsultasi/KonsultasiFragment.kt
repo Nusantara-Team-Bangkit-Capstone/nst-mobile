@@ -79,4 +79,8 @@ class KonsultasiFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    companion object {
+        const val name = ""
+    }
 }

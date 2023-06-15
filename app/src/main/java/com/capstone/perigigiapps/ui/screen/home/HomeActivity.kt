@@ -35,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
 
         floatingButton = findViewById(R.id.button_deteksi)
         floatingButton.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.container, DeteksiFragment())
+            supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_activity_home, DeteksiFragment())
                 .commit()
         }
 

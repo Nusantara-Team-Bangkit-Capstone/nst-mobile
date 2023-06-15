@@ -43,4 +43,6 @@
     </string>
     <string name="splascreen2_text">Scan dan Periksa Gigi Anda Sekarang!</string>
     <string name="btn_text_periksa_sekarang">Periksa Sekarang</string>
+    <string name="online">Online</string>
+    <string name="chat">Mulai Chat</string>
 </resources>

@@ -3,6 +3,7 @@ package com.capstone.perigigiapps.network.api
 import com.capstone.perigigiapps.data.entity.User
 import com.capstone.perigigiapps.network.response.deteksi.HasilDeteksiResponse
 import com.capstone.perigigiapps.network.response.deteksi.RiwayatDeteksiResponse
+import com.capstone.perigigiapps.network.response.doctor.ListDoctorResponse
 import com.capstone.perigigiapps.network.response.dummyResponse
 import com.capstone.perigigiapps.network.response.login.LoginResponse
 import com.capstone.perigigiapps.network.response.register.RegisterResponse
@@ -46,4 +47,9 @@ interface ApiService {
         @Path("id") id: Int?,
         @Header("Authorization") token: String
     ): RiwayatDeteksiResponse
+
+    @GET("doctor")
+    suspend fun getAllDoctor(
+        @Header("Authorization") token: String
+    ): ListDoctorResponse
 }

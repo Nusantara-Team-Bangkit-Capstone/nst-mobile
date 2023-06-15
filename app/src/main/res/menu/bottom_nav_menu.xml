@@ -12,8 +12,8 @@
         android:title="@string/title_konsultasi" />
 
     <item
-        android:id="@+id/navigation_deteksi"
-        android:icon="@drawable/baseline_photo_camera_24"
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/search"
         android:title="@string/title_deteksi" />
 
     <item

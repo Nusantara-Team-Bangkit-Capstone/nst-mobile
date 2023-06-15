@@ -2,9 +2,10 @@
     <string name="app_name">PeriGigi Apps</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_deteksi">Deteksi</string>
-    <string name="title_konsultasi">Konsultasi</string>
-    <string name="title_profile">Profil</string>
+    <string name="title_deteksi">Detection</string>
+    <string name="title_search">Search</string>
+    <string name="title_konsultasi">Consultation</string>
+    <string name="title_profile">Profile</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="splashscreen2_text">Periksa Kesehatan Gigi Secara Berkala. Jangan Tunggu Sampai Sakit.</string>
     <string name="invalid_email">Not a valid email</string>

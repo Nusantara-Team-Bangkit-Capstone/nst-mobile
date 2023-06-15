@@ -45,8 +45,6 @@ class HomeFragment : Fragment() {
         val name = jwt.getClaim("name").asString()
         binding.tvNameUser.text = name
 
-//        (activity as AppCompatActivity).supportActionBar?.hide()
-//        val textView: TextView = binding.textHome
         homeViewModel.getAllArticles().observe(viewLifecycleOwner) { result ->
             if (result != null) {
                 when (result) {

@@ -22,16 +22,15 @@
         <ImageView
             android:id="@+id/banner_home"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="140dp"
             android:contentDescription="@string/title_home"
             android:scaleType="centerCrop"
-            android:src="@drawable/dentistsmile"
+            android:src="@drawable/banner_home"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.cardview.widget.CardView>
-
 
     <TextView
         android:id="@+id/text_home"

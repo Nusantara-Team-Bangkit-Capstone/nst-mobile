@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.perigigiapps.databinding.FragmentKonsultasiBinding
+import com.capstone.perigigiapps.databinding.FragmentKonsultasiBinding
 
 class KonsultasiFragment : Fragment() {
     private var _binding: FragmentKonsultasiBinding? = null

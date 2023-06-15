@@ -145,7 +145,8 @@ class SectionFragment : Fragment() {
                                         SweetAlertDialog.SUCCESS_TYPE
                                     )
                                     sweetAlertDialog.titleText = "Gigi Sehat!"
-                                    sweetAlertDialog.contentText = "Gigi anda tampak sehat"
+                                    sweetAlertDialog.contentText =
+                                        "Gigi anda tampak sehat, pertahankan kesehatan gigi anda"
                                     sweetAlertDialog.show()
                                     sweetAlertDialog.setConfirmClickListener { sweetAlertDialog ->
                                         // Handle Confirm button click
@@ -158,7 +159,8 @@ class SectionFragment : Fragment() {
                                         SweetAlertDialog.ERROR_TYPE
                                     )
                                     sweetAlertDialog.titleText = "Gigi Tidak Sehat!"
-                                    sweetAlertDialog.contentText = "Gigi anda tampak tidak sehat"
+                                    sweetAlertDialog.contentText =
+                                        "Gigi anda tampak tidak sehat, anda disarankan untuk melakukan pemeriksaan ke dokter gigi"
                                     sweetAlertDialog.show()
                                     sweetAlertDialog.setConfirmClickListener { sweetAlertDialog ->
                                         // Handle Confirm button click
@@ -203,7 +205,7 @@ class SectionFragment : Fragment() {
         createCustomTempFile(requireContext().applicationContext).also {
             val photoURI: Uri = FileProvider.getUriForFile(
                 requireContext(),
-                "com.example.perigigiapps",
+                "com.capstone.perigigiapps",
                 it
             )
             currentPhotoPath = it.absolutePath

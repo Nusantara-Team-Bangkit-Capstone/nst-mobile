@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.screen.deteksi.SectionFragment">
+    tools:context=".ui.screen.deteksi.SectionFragment"
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/previewImageView"
         android:layout_width="0dp"
-        android:layout_height="350dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/cameraButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -32,7 +34,7 @@
         app:layout_constraintEnd_toStartOf="@+id/galleryButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/previewImageView" />
+        app:layout_constraintBottom_toTopOf="@+id/divider" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/galleryButton"
@@ -55,7 +57,7 @@
         android:layout_marginTop="15dp"
         app:dividerInsetEnd="16dp"
         app:dividerInsetStart="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/cameraButton" />
+        app:layout_constraintBottom_toTopOf="@+id/uploadButton" />
 
     <Button
         android:id="@+id/uploadButton"
@@ -69,7 +71,7 @@
         android:text="@string/unggah"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_history"

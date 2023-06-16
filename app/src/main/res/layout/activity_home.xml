@@ -67,7 +67,8 @@
             android:src="@drawable/baseline_photo_camera_24"
             app:backgroundTint="#004A85"
             app:layout_anchor="@id/bottomAppBar"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            android:importantForAccessibility="no" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.auth0.android.jwt.JWT
 import com.capstone.perigigiapps.MainActivity
 import com.capstone.perigigiapps.R
 import com.capstone.perigigiapps.databinding.FragmentProfileBinding
+import com.capstone.perigigiapps.ui.screen.deteksi.DeteksiActivity
 import com.squareup.picasso.Picasso
 
 
@@ -33,9 +35,16 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.constraintSetting.setOnClickListener {
-//            setting()
-//        }
+        binding.constraintSetting.setOnClickListener {
+            Toast.makeText(requireContext(), "Still in development", Toast.LENGTH_SHORT).show()
+        }
+        binding.constraintEdit.setOnClickListener {
+            Toast.makeText(requireContext(), "Still in development", Toast.LENGTH_SHORT).show()
+        }
+        binding.constraintLayout4.setOnClickListener {
+            val intent = Intent(activity, DeteksiActivity::class.java)
+            startActivity(intent)
+        }
         binding.constraintLogout.setOnClickListener {
             logout()
         }

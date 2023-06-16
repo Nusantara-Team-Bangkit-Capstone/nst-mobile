@@ -1,4 +1,6 @@
-# ![app icon](app/src/main/res/drawable/PerigigiApps.png) Peri Gigi Apps
+#  Peri Gigi Apps
+![Logo Apps](https://github.com/Nusantara-Team-Bangkit-Capstone/nst-mobile/assets/91375499/5a86e545-ef6d-499c-b6bd-5a5114b25905)
+
 Introducing our innovative dental health app that revolutionizes the way you care for your teeth. With our cutting-edge technology, you can now conveniently access professional dental services from the comfort of your own home.
 
 Our app offers a unique online virtual teeth checkup using state-of-the-art machine learning algorithms. Simply take a photo of your teeth using your smartphone camera, and our advanced system will analyze it to provide you with an instant assessment of your dental health. No more waiting rooms or cumbersome appointments - get personalized feedback on your oral hygiene anytime, anywhere.

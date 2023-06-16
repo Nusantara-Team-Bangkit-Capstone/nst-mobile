@@ -31,8 +31,8 @@ data class Data(
     @field:SerializedName("email")
     val email: String? = null,
 
-    @field:SerializedName("alamat")
-    val alamat: String? = null,
+    @field:SerializedName("no_telepon")
+    val no_telepon: String? = null,
 
     @field:SerializedName("updatedAt")
     val updatedAt: String? = null

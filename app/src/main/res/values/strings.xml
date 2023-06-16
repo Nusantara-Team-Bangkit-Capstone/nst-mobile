@@ -19,13 +19,13 @@
     <string name="text_login">Selamat Datang!</string>
     <string name="not_yet">Belum memiliki akun?</string>
     <string name="daftar">Daftar</string>
-    <string name="nama_hint">Nama</string>
-    <string name="address_hint">Alamat</string>
-    <string name="register">Register</string>
+    <string name="nama_hint">Masukkan Nama Anda</string>
+    <string name="numberphone_hint">Masukkan Nomor Telepon Anda</string>
+    <string name="register">Daftar</string>
     <string name="already_yet">Anda Sudah Memiliki Akun?</string>
     <string name="tv_item_title">Title</string>
     <string name="article_kesehatan">Artikel Kesehatan</string>
-    <string name="jenis_kelamin">Jenis Kelamin</string>
+    <string name="jenis_kelamin">Pilih Jenis Kelamin</string>
     <string name="account">account</string>
     <string name="change">Ubah Akun</string>
     <string name="delete">Hapus Akun</string>

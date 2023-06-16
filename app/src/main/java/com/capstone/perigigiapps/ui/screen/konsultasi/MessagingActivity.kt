@@ -30,9 +30,9 @@ class MessagingActivity : AppCompatActivity() {
         val jwt = JWT(token)
         val idSender = jwt.getClaim("id").asString()
         val nameSender = jwt.getClaim("name").asString()
-//        val nameReceivers = intent.getStringExtra(
-//            nameReceiver
-//        ).orEmpty()
+        val nameReceivers = intent.getStringExtra(
+            nameReceiver
+        ).orEmpty()
         val idReceivers = intent.getStringExtra(
             idReceiver
         ).orEmpty()
@@ -44,9 +44,9 @@ class MessagingActivity : AppCompatActivity() {
             chatText = chatText.trim()
             val chat = Chat(
                 sender = idSender.toString(),
-                receiver = "3",
+                receiver = idReceivers,
                 message = chatText,
-                receiverName = "nameReceivers",
+                receiverName = nameReceivers,
                 senderName = nameSender.toString()
             )
             messagingViewModel.postChat(token = token, chat = chat)

@@ -37,8 +37,8 @@ class ListDoctorAdapter(private val listDoctor: List<DataItem?>?) :
         }
         viewHolder.binding.tvButtonMessaging.setOnClickListener {
             val intentDetail = Intent(viewHolder.itemView.context, MessagingActivity::class.java)
-//            intentDetail.putExtra(MessagingActivity.nameReceiver, nama)
-            intentDetail.putExtra(MessagingActivity.idReceiver, id)
+            intentDetail.putExtra(MessagingActivity.nameReceiver, nama.toString())
+            intentDetail.putExtra(MessagingActivity.idReceiver, id.toString())
             viewHolder.itemView.context.startActivity(intentDetail)
         }
     }

@@ -36,6 +36,9 @@
         android:theme="@style/Theme.PeriGigiApps"
         tools:targetApi="31">
         <activity
+            android:name=".ui.screen.deteksi.DeteksiActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.screen.konsultasi.MessagingActivity"
             android:exported="false" />
         <activity

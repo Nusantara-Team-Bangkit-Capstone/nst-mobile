@@ -19,10 +19,10 @@ import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface ApiService {
-    @GET("everything?q=dental%health&sortBy=publishedAt&pageSize=10&apiKey=593e27d61fbb44d383e11ea4422f7a66")
+    @GET("everything?q=dental%health&sortBy=publishedAt&pageSize=10&apiKey=c04e28f877f74c4fa1e199d321b9ca57")
     suspend fun getArticles(): dummyResponse
 
-    @GET("everything?q=dental&sortBy=publishedAt&pageSize=10&apiKey=593e27d61fbb44d383e11ea4422f7a66")
+    @GET("everything?q=dental&sortBy=publishedAt&pageSize=10&apiKey=c04e28f877f74c4fa1e199d321b9ca57")
     suspend fun getArticles2(): dummyResponse
 
     @POST("login")

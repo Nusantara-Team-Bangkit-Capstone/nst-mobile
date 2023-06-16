@@ -36,6 +36,8 @@ class MessagingActivity : AppCompatActivity() {
         val idReceivers = intent.getStringExtra(
             idReceiver
         ).orEmpty()
+        val actionBar = supportActionBar
+        actionBar?.title = nameReceivers
         messagingViewModel = ViewModelProvider(this, factory)[MessagingViewModel::class.java]
 
         binding.sendButton.setOnClickListener {
@@ -67,6 +69,7 @@ class MessagingActivity : AppCompatActivity() {
                                     false
                                 )
                                 messagingAdapter.submitList(response)
+                                binding.messageEditText.setText(null)
                             }
 
                             is NetworkResult.Error -> {

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@+id/navigation_home">
 
+
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.capstone.perigigiapps.ui.screen.home.HomeFragment"
@@ -17,10 +18,16 @@
         tools:layout="@layout/fragment_konsultasi" />
 
     <fragment
-        android:id="@+id/navigation_deteksi"
-        android:name="com.capstone.perigigiapps.ui.screen.deteksi.DeteksiFragment"
-        android:label="@string/title_deteksi"
-        tools:layout="@layout/fragment_deteksi" />
+        android:id="@+id/navigation_search"
+        android:name="com.capstone.perigigiapps.ui.screen.konsultasi.KonsultasiFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_konsultasi" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_deteksi"-->
+<!--        android:name="com.capstone.perigigiapps.ui.screen.deteksi.DeteksiFragment"-->
+<!--        android:label="Deteksi"-->
+<!--        tools:layout="@layout/fragment_deteksi" />-->
 
     <fragment
         android:id="@+id/navigation_profile"

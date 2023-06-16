@@ -13,11 +13,15 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.capstone.perigigiapps.R
 import com.capstone.perigigiapps.databinding.ActivityHomeBinding
+import com.capstone.perigigiapps.ui.screen.deteksi.DeteksiFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var floatingButton: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +29,15 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         val navView: BottomNavigationView = binding.navView
+
+        floatingButton = findViewById(R.id.button_deteksi)
+        floatingButton.setOnClickListener {
+            supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_activity_home, DeteksiFragment())
+                .commit()
+        }
 
         val navController = findNavController(R.id.nav_host_fragment_activity_home)
         // Passing each menu ID as a set of Ids because each
@@ -34,8 +46,9 @@ class HomeActivity : AppCompatActivity() {
             setOf(
                 R.id.navigation_home,
                 R.id.navigation_konsultasi,
-                R.id.navigation_deteksi,
-                R.id.navigation_profile
+                R.id.navigation_search,
+                R.id.navigation_profile,
+                R.id.button_deteksi
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

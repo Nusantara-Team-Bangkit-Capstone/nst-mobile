@@ -11,6 +11,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        supportActionBar?.hide()
+
 //        Using Flexible Fragment for Login and Register
         val fragmentManager = supportFragmentManager
         val loginFragment = LoginFragment()

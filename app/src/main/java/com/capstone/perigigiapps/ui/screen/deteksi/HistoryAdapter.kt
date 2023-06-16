@@ -17,7 +17,6 @@ class HistoryAdapter(private val listHistory: List<DataItem?>) :
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val history = listHistory[position]
-        val id = history?.id
         val title = history?.scanningResult
         val description = history?.scanningDate
         val photo = history?.toothImg

@@ -6,6 +6,9 @@ plugins {
 android {
     namespace 'com.capstone.perigigiapps'
     compileSdk 33
+    dataBinding {
+        enabled = true
+    }
 
     defaultConfig {
         applicationId "com.capstone.perigigiapps"
@@ -68,6 +71,7 @@ dependencies {
     //    Camera
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation "androidx.camera:camera-camera2:1.2.2"
+
     //    LiveData
     implementation "androidx.camera:camera-lifecycle:1.2.2"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
@@ -79,9 +83,7 @@ dependencies {
     implementation 'com.auth0.android:jwtdecode:2.0.2'
     implementation 'com.squareup.picasso:picasso:2.8'
 
-//    Sweet Alert Dialog
+    //    Sweet Alert Dialog
     implementation 'com.github.f0ris.sweetalert:library:1.6.2'
 
-    //    Shimmer Effect Loading
-    implementation 'com.github.rasoulmiri:skeleton:v1.1.6'
 }

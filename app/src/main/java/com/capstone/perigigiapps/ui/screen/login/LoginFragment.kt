@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -19,6 +20,7 @@ import com.capstone.perigigiapps.di.Injection
 import com.capstone.perigigiapps.network.NetworkResult
 import com.capstone.perigigiapps.ui.screen.home.HomeActivity
 import com.capstone.perigigiapps.ui.screen.register.RegisterFragment
+import com.capstone.perigigiapps.ui.screen.splashscreen.InformationSplashScreen
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
@@ -39,6 +41,12 @@ class LoginFragment : Fragment() {
         registerTextView.setOnClickListener {
             // Perform navigation to the register fragment
             navigateToRegisterFragment()
+        }
+
+        val comeBackButton = view.findViewById<ImageView>(R.id.button_back)
+        comeBackButton.setOnClickListener {
+            val intent = Intent(activity, InformationSplashScreen::class.java)
+            startActivity(intent)
         }
 
 //        Login To Home Page

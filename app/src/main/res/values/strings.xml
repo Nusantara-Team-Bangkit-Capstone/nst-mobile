@@ -36,7 +36,7 @@
     <string name="image">image</string>
     <string name="kamera">kamera</string>
     <string name="galeri">galeri</string>
-    <string name="unggah">unggah</string>
+    <string name="unggah">Deteksi Gigi</string>
     <string name="title_activity_splashscreen">Splashscreen</string>
 
     <string name="image_view_item_transform_content_description">Represents an image view in the

@@ -7,17 +7,6 @@
     android:background="#6A7FDB"
     tools:context=".ui.screen.login.LoginFragment">
 
-<!--    <ImageView-->
-<!--        android:id="@+id/image_logo"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="240dp"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:contentDescription="@string/imagelogo"-->
-<!--        android:src="@drawable/peri_gigi"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <TextView
         android:id="@+id/text_login"
         android:layout_width="match_parent"
@@ -151,7 +140,6 @@
         android:fontFamily="@font/poppins"
         android:text="Masuk Dengan Akun Anda Untuk Melanjutkan"
         android:textColor="#FFFFFF"
-        android:textColorLink="#FFFFFF"
         app:layout_constraintStart_toStartOf="@+id/text_login"
         app:layout_constraintTop_toBottomOf="@+id/text_login" />
 

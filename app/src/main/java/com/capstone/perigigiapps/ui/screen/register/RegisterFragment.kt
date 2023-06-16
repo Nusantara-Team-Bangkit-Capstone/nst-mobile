@@ -1,5 +1,6 @@
 package com.capstone.perigigiapps.ui.screen.register
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -19,13 +21,14 @@ import com.capstone.perigigiapps.databinding.FragmentRegisterBinding
 import com.capstone.perigigiapps.di.Injection
 import com.capstone.perigigiapps.network.NetworkResult
 import com.capstone.perigigiapps.ui.screen.login.LoginFragment
+import com.capstone.perigigiapps.ui.screen.splashscreen.InformationSplashScreen
 
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
     private lateinit var registerViewModel: RegisterViewModel
     private var name = ""
-    private var address = ""
+    private var no_telepon = ""
     private var email = ""
     private var password = ""
     private var gender = ""
@@ -45,7 +48,12 @@ class RegisterFragment : Fragment() {
             navigateToLoginFragment()
         }
 
-        val genderOptions = listOf("Laki-Laki", "Perempuan", "Rahasia")
+        val comeBackButton = view.findViewById<ImageView>(R.id.button_back_login)
+        comeBackButton.setOnClickListener {
+            navigateToLoginFragment()
+        }
+
+        val genderOptions = listOf("Laki-Laki", "Perempuan")
         val adapter = ArrayAdapter(requireContext(), R.layout.list_gender_item, genderOptions)
         val autoCompleteTextViewGender =
             view.findViewById<AutoCompleteTextView>(R.id.autoCompleteTextViewGender)
@@ -57,18 +65,18 @@ class RegisterFragment : Fragment() {
         val registerNavigation = view.findViewById<Button>(R.id.register_button)
         registerNavigation.setOnClickListener {
             name = binding.nameEditTextRegister.text.toString().trim()
-            address = binding.addressEditTextRegister.text.toString().trim()
+            no_telepon = binding.addressEditTextRegister.text.toString().trim()
             email = binding.emailEditTextRegister.text.toString().trim()
             password = binding.passwordEditTextRegister.text.toString().trim()
             gender = autoCompleteTextViewGender.text.toString()
             val user = User(
                 nama = name,
-                alamat = address,
+                no_telepon = no_telepon,
                 jenis_kelamin = gender,
                 email = email,
                 password = password
             )
-            if (name.isEmpty() || address.isEmpty() || email.isEmpty() || password.isEmpty() || gender.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(
+            if (name.isEmpty() || no_telepon.isEmpty() || email.isEmpty() || password.isEmpty() || gender.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(
                     email.trim()
                 ).matches() || password.trim().length < 8
             ) {
@@ -117,8 +125,8 @@ class RegisterFragment : Fragment() {
         if (name.isEmpty()) {
             binding.nameTextInputRegister.error = "Name required"
         }
-        if (address.isEmpty()) {
-            binding.addressTextInputRegister.error = "Alamat required"
+        if (no_telepon.isEmpty()) {
+            binding.addressTextInputRegister.error = "Nomor Telepon required"
         }
         if (gender.isEmpty()) {
             binding.dropGender.error = "Jenis Kelamin required"

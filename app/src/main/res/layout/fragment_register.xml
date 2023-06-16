@@ -4,40 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#6A7FDB"
     tools:context=".ui.screen.register.RegisterFragment">
 
-    <TextView
-        android:id="@+id/text_logo_register"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_margin="32dp"
-        android:text="@string/peri_gigi"
-        android:textColor="@color/design_default_color_primary"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="30dp"
+        android:padding="7dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/button_back_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/text_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="left"
+        android:text="Senang Mengenal Anda"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/poppins"
+        android:text="Buat Akun Anda Untuk Melanjutkan"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/text_register"
+        app:layout_constraintTop_toBottomOf="@+id/text_register" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name_text_input_register"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/nama_hint"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_logo_register"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/name_edit_text_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/form_input_box"
+            android:fontFamily="@font/poppins"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="@string/address_hint"
+        android:hint="@string/numberphone_hint"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +94,8 @@
             android:id="@+id/address_edit_text_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:background="@drawable/form_input_box"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,6 +116,8 @@
             android:id="@+id/autoCompleteTextViewGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:background="@drawable/form_input_box"
             android:inputType="none" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -99,6 +139,8 @@
             android:id="@+id/email_edit_text_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:background="@drawable/form_input_box"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -120,6 +162,8 @@
             android:id="@+id/password_edit_text_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:background="@drawable/form_input_box"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,6 +175,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/poppins_bold"
+        android:backgroundTint="#03256C"
         android:padding="13dp"
         android:text="@string/register"
         app:layout_constraintStart_toStartOf="parent"
@@ -142,6 +187,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_button"
         android:text="@string/already_yet" />
@@ -153,7 +200,8 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:clickable="true"
-        android:textColor="@color/design_default_color_primary"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="#03256C"
         android:focusable="true"
         android:minWidth="48dp"
         android:minHeight="48dp"
@@ -172,4 +220,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:src="@drawable/hand_hello"
+        app:layout_constraintBottom_toBottomOf="@+id/text_register"
+        app:layout_constraintStart_toEndOf="@+id/text_register"
+        app:layout_constraintTop_toTopOf="@+id/text_register"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

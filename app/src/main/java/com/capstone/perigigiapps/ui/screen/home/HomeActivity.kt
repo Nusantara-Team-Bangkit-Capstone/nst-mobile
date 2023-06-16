@@ -1,6 +1,7 @@
 package com.capstone.perigigiapps.ui.screen.home
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
@@ -13,15 +14,14 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.capstone.perigigiapps.R
 import com.capstone.perigigiapps.databinding.ActivityHomeBinding
-import com.capstone.perigigiapps.ui.screen.deteksi.DeteksiFragment
+import com.capstone.perigigiapps.ui.screen.deteksi.DeteksiActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var floatingButton: FloatingActionButton
+//    private lateinit var floatingButton: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,25 +30,21 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
-
         val navView: BottomNavigationView = binding.navView
+        val navController = findNavController(R.id.nav_host_fragment_activity_home)
 
-        floatingButton = findViewById(R.id.button_deteksi)
-        floatingButton.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment_activity_home, DeteksiFragment())
-                .commit()
+
+        binding.buttonDeteksi.setOnClickListener {
+            val intent = Intent(this@HomeActivity, DeteksiActivity::class.java)
+            startActivity(intent)
         }
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_home)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
                 R.id.navigation_konsultasi,
                 R.id.navigation_search,
                 R.id.navigation_profile,
-                R.id.button_deteksi
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

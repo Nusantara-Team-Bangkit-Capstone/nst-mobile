@@ -26,6 +26,6 @@ class DoctorRepository(private val apiService: ApiService) {
                 instance ?: DoctorRepository(apiService)
             }.also { instance = it }
 
-        private val TAG = "UserRepository"
+        private val TAG = "DoctorRepository"
     }
 }

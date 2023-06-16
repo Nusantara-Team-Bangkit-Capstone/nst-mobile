@@ -139,7 +139,11 @@ class SectionFragment : Fragment() {
 
                             is NetworkResult.Success -> {
                                 binding.progressBar.isVisible = false
-                                if (result.data.data?.scanningResult == "Gigi Sehat") {
+                                if (result.data.data?.scanningResult.equals(
+                                        "Gigi Sehat",
+                                        ignoreCase = true
+                                    )
+                                ) {
                                     val sweetAlertDialog = SweetAlertDialog(
                                         requireContext(),
                                         SweetAlertDialog.SUCCESS_TYPE
@@ -153,7 +157,11 @@ class SectionFragment : Fragment() {
                                         sweetAlertDialog.dismissWithAnimation()
                                         // Perform any additional actions here
                                     }
-                                } else if (result.data.data?.scanningResult == "Gigi Tidak Sehat") {
+                                } else if (result.data.data?.scanningResult.equals(
+                                        "Gigi Tidak Sehat",
+                                        ignoreCase = true
+                                    )
+                                ) {
                                     val sweetAlertDialog = SweetAlertDialog(
                                         requireContext(),
                                         SweetAlertDialog.ERROR_TYPE

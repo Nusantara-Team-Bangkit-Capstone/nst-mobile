@@ -10,12 +10,13 @@
     <string name="splashscreen2_text">Periksa Kesehatan Gigi Secara Berkala. Jangan Tunggu Sampai Sakit.</string>
     <string name="invalid_email">Not a valid email</string>
     <string name="hello_blank_fragment">Blank Fragment</string>
-    <string name="login">Login</string>
+    <string name="login">Masuk</string>
     <string name="email">Email</string>
     <string name="shr_hint_email">Email</string>
     <string name="shr_hint_password">Password</string>
     <string name="imagelogo">imagelogo</string>
     <string name="peri_gigi">Peri Gigi</string>
+    <string name="text_login">Selamat Datang!</string>
     <string name="not_yet">Belum memiliki akun?</string>
     <string name="daftar">Daftar</string>
     <string name="nama_hint">Nama</string>

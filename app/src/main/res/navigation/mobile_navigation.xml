@@ -23,12 +23,6 @@
         android:label="@string/title_search"
         tools:layout="@layout/fragment_konsultasi" />
 
-<!--    <fragment-->
-<!--        android:id="@+id/navigation_deteksi"-->
-<!--        android:name="com.capstone.perigigiapps.ui.screen.deteksi.DeteksiFragment"-->
-<!--        android:label="Deteksi"-->
-<!--        tools:layout="@layout/fragment_deteksi" />-->
-
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.capstone.perigigiapps.ui.screen.profile.ProfileFragment"

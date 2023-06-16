@@ -51,7 +51,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="#FF6200EE"
+        android:backgroundTint="#03256C"
         android:fontFamily="@font/poppins_bold"
         android:padding="13dp"
         android:text="@string/btn_text_periksa_sekarang"

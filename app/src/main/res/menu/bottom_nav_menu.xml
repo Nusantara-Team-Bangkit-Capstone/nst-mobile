@@ -11,9 +11,10 @@
         android:icon="@drawable/baseline_chat_24"
         android:title="@string/title_konsultasi" />
 
-    <item
-        android:id="@+id/navigation_deteksi"
-        android:title="" />
+    <!--    <item-->
+    <!--        android:id="@+id/navigation_deteksi"-->
+    <!--        android:icon="@drawable/baseline_photo_camera_24"-->
+    <!--        android:title="@string/title_deteksi" />-->
 
     <item
         android:id="@+id/navigation_search"

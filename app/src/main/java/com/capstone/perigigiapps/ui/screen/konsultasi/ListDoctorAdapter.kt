@@ -35,9 +35,10 @@ class ListDoctorAdapter(private val listDoctor: List<DataItem?>?) :
                 .load(R.drawable.avatar_male)
                 .into(viewHolder.binding.ivItemPhoto)
         }
-        viewHolder.itemView.setOnClickListener {
+        viewHolder.binding.tvButtonMessaging.setOnClickListener {
             val intentDetail = Intent(viewHolder.itemView.context, MessagingActivity::class.java)
-//            intentDetail.putExtra(DetailFragment.id, id)
+            intentDetail.putExtra(MessagingActivity.nameReceiver, nama.toString())
+            intentDetail.putExtra(MessagingActivity.idReceiver, id.toString())
             viewHolder.itemView.context.startActivity(intentDetail)
         }
     }

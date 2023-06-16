@@ -104,4 +104,13 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    companion object {
+        val idArticle = ""
+        val nameArticle = ""
+        val publishedArticle = ""
+        val authorArticle = ""
+        val descriptionArticle = ""
+        val photoArticle = ""
+    }
 }

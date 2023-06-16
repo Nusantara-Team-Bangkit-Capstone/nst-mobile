@@ -15,6 +15,9 @@ class DeteksiActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDeteksiBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.hide()
+
         val sectionPagerAdapter = SectionPagerAdapter(activity = this@DeteksiActivity)
         val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = sectionPagerAdapter
